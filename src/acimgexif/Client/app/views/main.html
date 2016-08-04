@@ -20,17 +20,13 @@
                 <tr>
                     <th></th>
                     <th width="30">File</th>
-                    <th width="30">Thumbnail</th>
-                    <th width="30">Org file</th>
                     <th>EXIF data</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let rst of uploadResult">
                     <td><img src="{{rst.thumbnailFileUrl}}" /></td>
-                    <td>{{rst.fileUrl}}</td>
-                    <td>{{rst.thumbnailFileUrl}}</td>
-                    <td>{{rst.orgFileName}}</td>
+                    <td><a href="{{rst.fileUrl}}">{{rst.fileUrl}}</a></td>
                     <td>
                         <tr *ngFor="let exif of rst.exifTags">
                             <td>{{exif.group}}</td>
