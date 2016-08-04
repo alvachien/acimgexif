@@ -40,7 +40,8 @@
   "publishOptions": {
     "include": [
       "wwwroot",
-      "web.config"
+      "web.config",
+      "exiftool.exe"
     ],
     "exclude": [
       "node_modules",
