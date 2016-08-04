@@ -97,7 +97,6 @@ namespace acimgexif
                     foreach (var item in wrap)
                     {
                         System.Diagnostics.Debug.WriteLine("{0}, {1}, {2}", item.group, item.name, item.value);
-                        _logger.LogInformation(exp.Message);
                         rst.ExifTags.Add(item);
                     }
                     listResults.Add(rst);
