@@ -1,7 +1,13 @@
 {
-	"version": "1.0.0",
-	"name": "acimgexif",
+  "version": "1.0.0",
+  "name": "acimgexif",
   "private": true,
+  "scripts": {
+    "postinstall": "typings install",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "typings": "typings"
+  },
   "dependencies": {
     "@angular/common": "2.0.0-rc.4",
     "@angular/compiler": "2.0.0-rc.4",
