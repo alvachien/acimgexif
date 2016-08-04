@@ -1,0 +1,44 @@
+﻿<div class="container">
+    <h2>AC Image EXIF Viewer<small>Take a view upon EXIF data</small></h2>
+
+    <div class="row">
+        <input type="file" (change)="onChange($event)" />
+    </div>
+    <div class="row">
+        <input type="submit" (click)="onSubmit($event)" />
+    </div>
+
+    <div class="row">
+        <ngb-progressbar type="success" value="{{uploadProgress}}"></ngb-progressbar>
+    </div>
+
+    <hr />    
+    <div class="row">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>File</th>
+                    <th>Thumbnail</th>
+                    <th>Org file</th>
+                    <th>EXIF data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let rst of uploadResult">
+                    <td><img src="{{rst.thumbnailFileUrl}}" /></td>
+                    <td>{{rst.fileUrl}}</td>
+                    <td>{{rst.thumbnailFileUrl}}</td>
+                    <td>{{rst.orgFileName}}</td>
+                    <td>
+                        <tr *ngFor="let exif of rst.exifTags">
+                            <td>{{exif.group}}</td>
+                            <td>{{exif.name}}</td>
+                            <td>{{exif.value}}</td>
+                        </tr>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

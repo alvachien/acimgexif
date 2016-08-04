@@ -1,14 +1,16 @@
-﻿{
+{
   "dependencies": {
     "Microsoft.NETCore.App": {
       "version": "1.0.0",
       "type": "platform"
     },
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
-    
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
-    "Microsoft.Extensions.Logging.Console": "1.0.0"
+    "Microsoft.Extensions.Logging.Console": "1.0.0",
+    "Microsoft.AspNetCore.Mvc": "1.0.0",
+    "Microsoft.AspNetCore.StaticFiles": "1.0.0",
+    "Magick.NET.Core-Q8": "7.0.2.600"
   },
 
   "tools": {
@@ -39,10 +41,30 @@
     "include": [
       "wwwroot",
       "web.config"
+    ],
+    "exclude": [
+      "node_modules",
+      "bower_components",
+      "typings"
     ]
   },
 
   "scripts": {
+    "prepublish": [
+      "npm install",
+      "npm install typescript",
+      "npm install typings",
+      "npm install gulp",
+      "npm install path",
+      "npm install gulp-clean",
+      "npm install gulp-concat",
+      "npm install gulp-typescript",
+      "npm install gulp-tsc",
+      "npm install del",
+      "bower install",
+      "typings install",
+      "gulp --gulpfile gulpfile.js build"
+    ],
     "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
   }
 }

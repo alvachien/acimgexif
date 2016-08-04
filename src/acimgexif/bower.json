@@ -1,0 +1,8 @@
+{
+	"name": "acimgexif",
+	"private": true,
+  "dependencies": {
+    "alertify.js": "0.3.11",
+    "font-awesome": "4.6.1"
+  }
+}
