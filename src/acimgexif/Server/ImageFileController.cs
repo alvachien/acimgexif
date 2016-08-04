@@ -89,15 +89,24 @@ namespace acimgexif
             {
                 await ffile.CopyToAsync(fileStream);
 
-                ExifToolWrapper wrap = new ExifToolWrapper();
-                wrap.Run(Path.Combine(uploads, nfilename));
-                
-                foreach (var item in wrap)
+                try
                 {
-                    System.Diagnostics.Debug.WriteLine("{0}, {1}, {2}", item.group, item.name, item.value);
-                    rst.ExifTags.Add(item);
+                    ExifToolWrapper wrap = new ExifToolWrapper();
+                    wrap.Run(Path.Combine(uploads, nfilename));
+
+                    foreach (var item in wrap)
+                    {
+                        System.Diagnostics.Debug.WriteLine("{0}, {1}, {2}", item.group, item.name, item.value);
+                        _logger.LogInformation(exp.Message);
+                        rst.ExifTags.Add(item);
+                    }
+                    listResults.Add(rst);
                 }
-                listResults.Add(rst);
+                catch(Exception exp)
+                {
+                    System.Diagnostics.Debug.WriteLine(exp.Message);
+                    _logger.LogError(exp.Message);
+                }
 
                 try
                 {
@@ -136,6 +145,7 @@ namespace acimgexif
                 catch(Exception exp)
                 {
                     System.Diagnostics.Debug.WriteLine(exp.Message);
+                    _logger.LogError(exp.Message);
                 }
             }
 
