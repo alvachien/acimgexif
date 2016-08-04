@@ -63,40 +63,47 @@ namespace acimgexif
 
             // parse the output into tags
             this.Clear();
-            while (output.Length > 0)
+            try
             {
-                int epos = output.IndexOf('\r');
-
-                if (epos < 0)
-                    epos = output.Length;
-                string tmp = output.Substring(0, epos);
-                int tpos1 = tmp.IndexOf('\t');
-                int tpos2 = tmp.IndexOf('\t', tpos1 + 1);
-
-                if (tpos1 > 0 && tpos2 > 0)
+                while (output.Length > 0)
                 {
-                    string taggroup = tmp.Substring(0, tpos1);
-                    ++tpos1;
-                    string tagname = tmp.Substring(tpos1, tpos2 - tpos1);
-                    ++tpos2;
-                    string tagvalue = tmp.Substring(tpos2, tmp.Length - tpos2);
+                    int epos = output.IndexOf('\r');
 
-                    // special processing for tags with binary data 
-                    tpos1 = tagvalue.IndexOf(", use -b option to extract");
-                    if (tpos1 >= 0)
-                        tagvalue.Remove(tpos1, 26);
+                    if (epos < 0)
+                        epos = output.Length;
+                    string tmp = output.Substring(0, epos);
+                    int tpos1 = tmp.IndexOf('\t');
+                    int tpos2 = tmp.IndexOf('\t', tpos1 + 1);
 
-                    ExifTagItem itm;
-                    itm.name = tagname;
-                    itm.value = tagvalue;
-                    itm.group = taggroup;
-                    this.Add(itm);
+                    if (tpos1 > 0 && tpos2 > 0)
+                    {
+                        string taggroup = tmp.Substring(0, tpos1);
+                        ++tpos1;
+                        string tagname = tmp.Substring(tpos1, tpos2 - tpos1);
+                        ++tpos2;
+                        string tagvalue = tmp.Substring(tpos2, tmp.Length - tpos2);
+
+                        // special processing for tags with binary data 
+                        tpos1 = tagvalue.IndexOf(", use -b option to extract");
+                        if (tpos1 >= 0)
+                            tagvalue.Remove(tpos1, 26);
+
+                        ExifTagItem itm;
+                        itm.name = tagname;
+                        itm.value = tagvalue;
+                        itm.group = taggroup;
+                        this.Add(itm);
+                    }
+
+                    // is \r followed by \n ?
+                    if (epos < output.Length)
+                        epos += (output[epos + 1] == '\n') ? 2 : 1;
+                    output = output.Substring(epos, output.Length - epos);
                 }
-
-                // is \r followed by \n ?
-                if (epos < output.Length)
-                    epos += (output[epos + 1] == '\n') ? 2 : 1;
-                output = output.Substring(epos, output.Length - epos);
+            }
+            catch(Exception exp)
+            {
+                System.Diagnostics.Debug.WriteLine(exp.Message);
             }
         }
 

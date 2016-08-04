@@ -99,16 +99,27 @@ namespace acimgexif
                 }
                 listResults.Add(rst);
 
-                using (MagickImage image = new MagickImage(Path.Combine(uploads, nfilename)))
+                try
                 {
-                    // Retrieve the exif information
-                    ExifProfile profile = image.GetExifProfile();
-                    using (MagickImage thumbnail = profile.CreateThumbnail())
+                    using (MagickImage image = new MagickImage(Path.Combine(uploads, nfilename)))
                     {
-                        // Check if exif profile contains thumbnail and save it
-                        if (thumbnail != null)
-                            thumbnail.Write(Path.Combine(uploads, nthumbfilename));
-                        else
+                        // Retrieve the exif information
+                        ExifProfile profile = image.GetExifProfile();
+                        Boolean bThumbnailCreated = false;
+                        if (profile != null)
+                        {
+                            using (MagickImage thumbnail = profile.CreateThumbnail())
+                            {
+                                // Check if exif profile contains thumbnail and save it
+                                if (thumbnail != null)
+                                {
+                                    thumbnail.Write(Path.Combine(uploads, nthumbfilename));
+                                    bThumbnailCreated = true;
+                                }
+                            }
+                        }
+
+                        if (!bThumbnailCreated)
                         {
                             MagickGeometry size = new MagickGeometry(300, 300);
                             // This will resize the image to a fixed size without maintaining the aspect ratio.
@@ -121,6 +132,10 @@ namespace acimgexif
                             image.Write(Path.Combine(uploads, nthumbfilename));
                         }
                     }
+                }
+                catch(Exception exp)
+                {
+                    System.Diagnostics.Debug.WriteLine(exp.Message);
                 }
             }
 

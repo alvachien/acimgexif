@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
     constructor(
         private psservice: ImageFileService) {
         this.service = psservice;
+        this.uploadProgress = 0;
 
         this.service.progress$.subscribe(
             data => {
