@@ -1,7 +1,4 @@
 ﻿<div class="container-fluid">
-    <h2>AC Image EXIF Viewer<small>View EXIF of Images</small></h2>
-
-    <hr />
     <div class="row">
         <input type="file" (change)="onChange($event)" />
     </div>
@@ -10,7 +7,7 @@
     </div>
 
     <div class="row">
-        <ngb-progressbar type="success" value="{{uploadProgress}}"></ngb-progressbar>
+        <ngb-progressbar type="success" [value]="uploadProgress"></ngb-progressbar>
     </div>
 
     <hr />    
@@ -19,14 +16,12 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th width="30">File</th>
                     <th>EXIF data</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let rst of uploadResult">
-                    <td><img src="{{rst.thumbnailFileUrl}}" /></td>
-                    <td><a href="{{rst.fileUrl}}">{{rst.fileUrl}}</a></td>
+                    <td><a href="{{rst.fileUrl}}"><img src="{{rst.thumbnailFileUrl}}" /></a></td>
                     <td>
                         <tr *ngFor="let exif of rst.exifTags">
                             <td>{{exif.group}}</td>

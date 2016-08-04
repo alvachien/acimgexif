@@ -14,19 +14,15 @@ import { ImageFileService } from './imagefile.service';
 
 export class AppComponent implements OnInit {
     public selectedFiles: any;
-    public service: ImageFileService;
     public uploadProgress: number;
     public uploadResult: Array<any>;
 
-    constructor(
-        private psservice: ImageFileService) {
-        this.service = psservice;
+    constructor(private psservice: ImageFileService) {
         this.uploadProgress = 0;
 
-        this.service.progress$.subscribe(
+        this.psservice.progress$.subscribe(
             data => {
-                console.log('progress = ' + data);
-                this.uploadProgress = parseInt(data);
+                this.onUpdateProgress(data);
             });
     }
 
@@ -34,13 +30,14 @@ export class AppComponent implements OnInit {
     }
 
     onChange(event) {
-        console.log('onChange');
+        //console.log('onChange');
         this.selectedFiles = event.srcElement.files;
+        this.uploadProgress = 0;
     }
 
     onSubmit(event) {
-        this.service.makeFileRequest('api/imagefile', [], this.selectedFiles).subscribe(value => {
-            console.log(value);
+        this.psservice.makeFileRequest('api/imagefile', [], this.selectedFiles).subscribe(value => {
+            //console.log(value);
 
             if (value.length > 0) {
                 for (let i = 0; i < value.length; i++) {
@@ -50,5 +47,10 @@ export class AppComponent implements OnInit {
                 }
             }
         });
+    }
+
+    onUpdateProgress(num: number) {
+        console.log('+++ progress = ' + num);
+        this.uploadProgress = num;
     }
 }
