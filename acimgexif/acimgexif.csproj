@@ -1,18 +1,43 @@
-# Introduction
-This project brings the functionalities:
-- Read EXIF from specified Image;
-- Update EXIF from specified Image;
-- Resize Image;
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-# Infrastructure
-Unlike HIH, ACGallery projects which split the UI project and its Web API project, this project embedded the Angular App within ASP.NET Core project.
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <Authors>Alva Chien</Authors>
+    <Product>Image EXIF Maintainer and More</Product>
+    <AssemblyVersion>1.5.0.0</AssemblyVersion>
+    <FileVersion>1.5.0.0</FileVersion>
 
-## SPA Template
-Though Microsoft introduce SPA template for Angular, that template was quite out-of-date.
+    <UISrcRoot>UI\imgexif\</UISrcRoot>
 
-## Real approach
-To make the Angular app embedded into ASP.NET Core project, here comes the list of steps:
-- Manually change the csproject file by adding parts:
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\ImageFileController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <!-- Don't publish the UI source files, but do show them in the project files list -->
+    <Content Remove="$(UISrcRoot)**" />
+    <None Include="$(UISrcRoot)**" Exclude="$(UISrcRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="exiftool.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(UISrcRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="echo Checking Node.js existence..." />
@@ -34,15 +59,8 @@ To make the Angular app embedded into ASP.NET Core project, here comes the list 
     <Exec WorkingDirectory="$(UISrcRoot)" Command="npm run build --prod" />
   </Target>
 
-- Change angular.json by setting its dest folder to wwwroot:
-"outputPath": "../../wwwroot"
+  <!--<Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    
+  </Target>-->
 
-- Enable static files in ASP.NET Core project.
-
-- [Optional] Visual Studio Code can be used to edit it for sure.
-Commands for building and starting the project: 
-msbuild acimgexif.sln
-dotnet run --project ./acimgexif/acimgexif.csproj
-
-## TBD.
-
+</Project>
