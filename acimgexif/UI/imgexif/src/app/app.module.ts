@@ -7,11 +7,13 @@ import { MatButtonModule, MatBadgeModule, MatCardModule, MatCheckboxModule,
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page';
+import { AppNavbarComponent } from './app-navbar/app-navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomePageComponent
+    HomePageComponent,
+    AppNavbarComponent
   ],
   imports: [
     BrowserModule,
