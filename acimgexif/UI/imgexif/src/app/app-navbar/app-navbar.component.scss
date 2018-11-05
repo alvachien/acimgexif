@@ -15,18 +15,6 @@
     flex-grow: 1;
   }
   
-  .app-angular-logo {
-    height: 26px;
-    margin: 0 4px 3px 0;
-    vertical-align: middle;
-  }
-  
-  .app-github-logo {
-    height: 21px;
-    margin: 0 7px 2px 0;
-    vertical-align: middle;
-  }
-  
   .app-navbar-link {
     text-decoration: inherit;
     flex: 1;
@@ -55,10 +43,6 @@
   
     .app-navbar {
       display: flex;
-    }
-  
-    .app-navbar--github-logo {
-      margin: 0;
     }
   }
   

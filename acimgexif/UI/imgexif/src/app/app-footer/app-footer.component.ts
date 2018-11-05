@@ -5,7 +5,7 @@ import { Component, NgModule } from '@angular/core';
   templateUrl: './app-footer.component.html',
   styleUrls: ['./app-footer.component.scss']
 })
-export class AppFooterComponent {
+export class FooterComponent {
 
   version = '1.0';
 
@@ -13,7 +13,7 @@ export class AppFooterComponent {
 }
 
 @NgModule({
-  exports: [AppFooterComponent],
-  declarations: [AppFooterComponent],
+  exports: [FooterComponent],
+  declarations: [FooterComponent],
 })
 export class FooterModule {}
