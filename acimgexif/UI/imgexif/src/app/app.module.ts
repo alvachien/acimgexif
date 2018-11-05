@@ -13,12 +13,14 @@ import { AppNavbarComponent } from './app-navbar/app-navbar.component';
 import { ThemePicker, ThemePickerModule, } from './theme-picker/theme-picker.component';
 import { ThemeStorage } from './theme-picker/theme-storage/theme-storage';
 import { StyleManager } from './style-manager/style-manager';
+import { AppFooter } from './app-footer/app-footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     AppNavbarComponent,
+    AppFooterComponent,
   ],
   imports: [
     BrowserModule,
