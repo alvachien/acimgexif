@@ -8,13 +8,6 @@ import {
 } from '@angular/core';
 import {StyleManager} from '../style-manager/style-manager';
 import {ThemeStorage, AppSiteTheme} from './theme-storage/theme-storage';
-import {
-  MatButtonModule,
-  MatGridListModule,
-  MatIconModule,
-  MatMenuModule,
-  MatTooltipModule,
-} from '@angular/material';
 import {CommonModule} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
@@ -99,17 +92,3 @@ export class ThemePicker implements OnInit, OnDestroy {
   }
 }
 
-@NgModule({
-  imports: [
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
-    MatGridListModule,
-    MatTooltipModule,
-    CommonModule
-  ],
-  exports: [ThemePicker],
-  declarations: [ThemePicker],
-  providers: [StyleManager, ThemeStorage],
-})
-export class ThemePickerModule { }

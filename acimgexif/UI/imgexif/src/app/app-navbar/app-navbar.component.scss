@@ -23,24 +23,12 @@
   .app-navbar {
     display: none;
   }
-  
-  .app-navbar-show-small {
-    display: none;
-  }
-  
+ 
   /**
     * Rules for when the device is detected to be a small screen.
     * Moves content two rows instead of one.
     */
   @media (max-width: 720px) {
-    .app-navbar-hide-small {
-      display: none;
-    }
-  
-    .app-navbar-show-small {
-      display: block;
-    }
-  
     .app-navbar {
       display: flex;
     }

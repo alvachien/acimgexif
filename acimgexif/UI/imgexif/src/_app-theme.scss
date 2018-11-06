@@ -1,8 +1,5 @@
 @import '../node_modules/@angular/material/theming';
 
-@import './app/app-footer/footer-theme';
-@import './app/app-navbar/navbar-theme';
-
 // Styles for the docs app that are based on the current theme.
 @mixin app-theme($theme) {
   $primary: map-get($theme, primary);
@@ -29,6 +26,17 @@
     color: mat-color($primary, default-contrast);
   }
 
-  @include footer-theme($theme);
-  @include nav-bar-theme($theme);
+  app-navbar {
+    color: mat-color($primary, default-contrast);
+  }
+  
+  .app-navbar-header {
+    background: mat-color($primary);
+  }
+
+  app-footer {
+    .app-footer-links a {
+      color: mat-color($primary, default-contrast);
+    }
+  }
 }

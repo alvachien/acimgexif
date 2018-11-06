@@ -12,8 +12,3 @@ export class FooterComponent {
   constructor() { }
 }
 
-@NgModule({
-  exports: [FooterComponent],
-  declarations: [FooterComponent],
-})
-export class FooterModule {}
