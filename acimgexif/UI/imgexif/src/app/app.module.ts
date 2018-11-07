@@ -18,6 +18,7 @@ import { ThemePicker } from './theme-picker/theme-picker.component';
 import { ThemeStorage } from './theme-picker/theme-storage/theme-storage';
 import { StyleManager } from './style-manager/style-manager';
 import { FooterComponent } from './app-footer/app-footer.component';
+import { ImageUploadModule } from './image-upload/image-upload.module';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { FooterComponent } from './app-footer/app-footer.component';
     MatTooltipModule,
 
     AppRoutingModule,
+    ImageUploadModule,
   ],
   providers: [
     StyleManager,
